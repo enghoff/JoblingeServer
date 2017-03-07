@@ -1,0 +1,84 @@
+- content_for :admin_header_title
+  | #{@resource.nickname} statistics
+
+.row.text-center
+  .col-md-3
+    .panel.panel-success
+      .panel-heading
+        h4 Number of times played
+      .panel-body
+        h3.margin-none
+          = total_times = @resource.player_sessions.count
+
+  .col-md-3
+    .panel.panel-success
+      .panel-heading
+        h4 Total time played
+      .panel-body
+        h3.margin-none
+          - total_seconds =  @resource.player_sessions.sum(:duration_in_seconds)
+          - hours = total_seconds / (60 * 60)
+          - minutes = (total_seconds / 60) % 60
+          - seconds = total_seconds % 60
+          = "#{ hours }h #{ minutes }m"
+
+  .col-md-3
+    .panel.panel-success
+      .panel-heading
+        h4 Average time per session
+      .panel-body
+        h3.margin-none
+          - average_seconds = (total_seconds / total_times.to_f).round
+          - hours = average_seconds / (60 * 60)
+          - minutes = (average_seconds / 60) % 60
+          - seconds = average_seconds % 60
+          = "#{ hours }h #{ minutes }m"
+
+  .col-md-3
+    .panel.panel-success
+      .panel-heading
+        h4 Last session time played
+      .panel-body
+        h3.margin-none
+          - last_session_time_played = @resource.player_sessions.order(finished_at: :desc).first.duration_in_seconds
+          - hours = last_session_time_played / (60 * 60)
+          - minutes = (last_session_time_played / 60) % 60
+          - seconds = last_session_time_played % 60
+          = "#{ hours }h #{ minutes }m"
+
+.row.margin-bottom-20
+  .col-md-3
+    h5 First Time played
+    = @resource.player_sessions.order(started_at: :asc).first.started_at
+  .col-md-3
+    h5 Last Time played
+    = @resource.player_sessions.order(finished_at: :desc).first.started_at
+
+.btn-group
+  = link_to "Days", statistics_admin_user_path(@resource, group_by: :day), remote: true, class: "btn btn-default"
+  .btn.btn-default.active
+    | Weeks
+  .btn.btn-default
+    | Months
+  .btn.btn-default
+    | Years
+
+h5 Times Player last month
+= @resource.player_sessions.where(started_at: 1.month.ago..Date.today).count
+
+h5 Minutes Played last month
+= @resource.player_sessions.where(started_at: 1.month.ago..Date.today).sum(:duration_in_seconds)
+
+h5 Times played last weeks
+- @resource.player_sessions.group_by_week(:started_at, range: 1.month.ago.midnight..Time.now).count.each do |time, count|
+  p
+    = time
+    br
+    = count
+
+h5 Minutes played last weeks
+- PlayerSession.group_by_week(:started_at).sum(:duration_in_seconds).each do |time, count|
+  p
+    = time
+    br
+    = count

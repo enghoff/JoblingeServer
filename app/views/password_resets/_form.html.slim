@@ -1,0 +1,13 @@
+= simple_form_for @user, :url => password_reset_path(@user), :html => {:method => :put} do |f|
+  = errors_list(@user)
+  .form-group
+    = f.label :email
+    br
+    = @user.email
+
+  = f.input :password, required: true
+  = f.input :password_confirmation, required: true
+  = hidden_field_tag :token, @token
+
+  .actions
+    = f.submit class:"btn btn-primary"

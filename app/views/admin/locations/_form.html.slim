@@ -1,0 +1,6 @@
+.row
+  .col-md-6
+    = errors_list(resource)
+    = simple_form_for [:admin, resource] do |f|
+      = f.input :name
+      = f.button :submit, class:"btn-primary margin-top-15"

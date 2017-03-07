@@ -1,0 +1,26 @@
+- content_for :navbar_content do
+  ul.nav.navbar-nav
+    li class=("active" if controller.controller_name == "users")
+      = link_to "Users", admin_users_path
+    li class=("active" if controller.controller_name == "groups")
+      = link_to "Groups", admin_groups_path
+    li class=("active" if controller.controller_name == "locations")      
+      = link_to "Locations", admin_locations_path
+
+- content_for :layout_main do
+    main.container-fluid
+      .admin-header
+        h1.admin-header-title
+          = yield :admin_header_title
+        .admin-header-actions
+          = yield :admin_header_actions
+
+      .admin-main
+        - if content_for? :admin_subheader
+          .admin-subheader
+            = yield :admin_subheader
+
+        .admin-body
+          = yield
+
+= render "/layouts/base"

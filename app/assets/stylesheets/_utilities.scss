@@ -1,0 +1,46 @@
+.noselect {
+  user-select: none
+}
+.noscroll {
+  overflow: hidden;
+  position: fixed;
+  // overflow-y:scroll
+}
+
+@for $i from 0 through 50 {
+  .margin-top-#{$i} {
+    margin-top: $i * 1px;
+  }
+  .margin-bottom-#{$i} {
+    margin-bottom: $i * 1px;
+  }
+  .margin-right-#{$i} {
+    margin-right: $i * 1px;
+  }
+  .margin-left-#{$i} {
+    margin-left: $i * 1px;
+  }
+}
+
+.margin-none{
+  margin: 0;
+}
+
+.clear{
+  clear: both;
+}
+
+.hidden-xs-flex {
+  @include display(flex);
+  @media (max-width: 478px) {
+    display: none !important;
+  }
+}
+
+.padding-20{
+  padding: 20px;
+}
+
+.padding-left-30{
+  padding-left: 30px;
+}

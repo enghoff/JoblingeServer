@@ -1,0 +1,15 @@
+h2.margin-bottom-15
+  = t('.sign_in', :default => "Sign in")
+
+= form_tag user_sessions_path, :method => :post do
+  .form-group
+    .only-ie-block
+      = label_tag :email
+    = email_field_tag :email, nil, placeholder: "Email", autofocus: true, class: "form-control"
+  .form-group
+    .only-ie-block
+      = label_tag :password
+    = password_field_tag :password, nil, placeholder: "Password", autocomplete: "off", class: "form-control"
+
+  = hidden_field_tag :remember, true
+  = submit_tag  t('.sign_in', :default => "Sign in"), class: "btn btn-primary btn-lg btn-block"

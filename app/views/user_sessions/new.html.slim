@@ -1,0 +1,13 @@
+.form-sign-in
+  = render 'form'
+  br
+  br
+  = link_to "forgot password?", "#", id:"forgotPasswordLink", class:"text-muted"
+  #forgotPasswordWrapper.hidden
+    = render 'forgot_password_form'
+
+coffee:
+  $("#forgotPasswordLink").click (e)->
+    e.preventDefault()
+    $("#forgotPasswordWrapper").removeClass('hidden')
+    $("#forgotPasswordLink").remove()

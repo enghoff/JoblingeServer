@@ -1,0 +1,113 @@
+.admin-layout{
+  background: #F1F1F1;
+}
+
+.admin-main{
+  min-height: calc(100vh - 245px);
+  background: #FFF;
+  padding: 20px;
+  margin: 5px;
+  box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header{
+  background: #F1F1F1;
+  padding: 40px 20px 15px 20px;
+  margin: 0 -15px 20px -15px;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.1);
+  @include clearfix;
+}
+
+.admin-header-title{
+  float: left;
+  margin: 0;
+}
+
+.admin-header-actions{
+  float: right;
+}
+
+.admin-subheader{
+  margin-bottom: 20px;
+}
+
+
+.admin-search{
+  position:relative;
+  border-bottom: 1px solid #DDD;
+  margin: 0 -20px;
+  padding: 0 20px;
+  .admin-search-symbol{
+    position: absolute;
+    left: 20px;
+    top: 12px;
+  }
+  input{
+    border: none;
+    appearance: none;
+    box-shadow: none;
+
+    border-radius: 0;
+    font-size: 14px;
+    padding: 10px 5px 10px 20px;
+    width: 100%;
+    &:focus{
+      outline: none;
+    }
+  }
+}
+
+$admin-search-close-size: 20px;
+.admin-search-close{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: inline-block;
+  height: $admin-search-close-size;
+  width: $admin-search-close-size;
+  line-height: $admin-search-close-size;
+  text-align: center;
+  background: #CCC;
+  border-radius: 4px;
+  color: #FFF;
+  cursor: pointer;
+  &:hover{
+    background: #BBB;
+  }
+}
+
+.table-sortable-header-link{
+  display: block;
+  color: currentColor;
+  font-weight: initial;
+  i{
+    visibility: hidden;
+    float: right;
+    margin: 2px 4px 0 0;
+  }
+  &:hover{
+    color: #337ab7;
+    text-decoration: none;
+    i{
+      visibility: visible;
+    }
+  }
+  &.table-sortable-header-link-current{
+    font-weight: bold;
+    i{
+      visibility: visible;
+    }
+  }
+}
+
+.no-wrap-table{
+  white-space:nowrap;
+}
+
+.btn-group.btn-group-table-fix{
+  white-space: nowrap;
+  .btn{
+    float: none;
+    display: inline-block;
+  }
+}

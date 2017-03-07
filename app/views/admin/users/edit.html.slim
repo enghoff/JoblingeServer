@@ -1,0 +1,18 @@
+- content_for :admin_header_title
+  | Edit User
+
+= render "form", resource: @resource
+
+hr
+
+p
+  label.margin-right-15 Registration Code
+  = @resource.registration_code
+
+p
+  label.margin-right-15 Registered At:
+  - if @resource.registration_pending?
+    = "---"
+    = link_to "resend email instructions to #{@resource.email}", resend_registration_mail_admin_user_path(@resource), class: "btn btn-default margin-left-15", method: :position
+  - else
+    = date_format(@resource.registered_at)

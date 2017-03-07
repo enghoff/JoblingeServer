@@ -1,0 +1,46 @@
+- content_for :admin_header_title
+  | #{@resource.nickname} statistics
+
+.row.text-center
+  .col-md-3
+    .panel.panel-success
+      .panel-heading
+        h4 Number of times played
+      .panel-body
+        h3.margin-none
+          = @stats.total_times
+
+  .col-md-3
+    .panel.panel-success
+      .panel-heading
+        h4 Total time played
+      .panel-body
+        h3.margin-none
+          = @stats.total_time_played
+
+  .col-md-3
+    .panel.panel-success
+      .panel-heading
+        h4 Average time per session
+      .panel-body
+        h3.margin-none
+          = @stats.average_time_per_session
+
+  .col-md-3
+    .panel.panel-success
+      .panel-heading
+        h4 Last session time played
+      .panel-body
+        h3.margin-none
+          = @stats.last_session_time_played
+
+.row.margin-bottom-20
+  .col-md-3
+    h5 First Time played
+    = @stats.first_time_played_at
+  .col-md-3
+    h5 Last Time played
+    = @stats.last_time_played_at
+
+#admin-player-sessions-grouped-stats
+  = render partial: 'admin/users/grouped_stats', locals:{ stats: @stats, grouped_by: @grouped_by }

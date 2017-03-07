@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Welcome to the Joblinge game</h1>
+     <p>
+      Please download the game at:
+    </p>
+    <ul>
+      <li><%= link_to "Apple Store", @app_store_download_link %></li>
+      <li><%= link_to "Google Play", @google_play_download_link %></li>
+    </ul>
+    <p>Your registration code is <strong><%= @registration_code %></strong></p>
+  </body>
+</html>

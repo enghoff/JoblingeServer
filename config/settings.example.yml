@@ -1,0 +1,6 @@
+external_game_routes:
+  app_store_download_link: "app_store_download_link"
+  google_play_download_link: "google_play_download_link"
+mails:
+  user_registration_title: "Joblinge registration"
+  user_password_reset_title: "Joblinge password reset"

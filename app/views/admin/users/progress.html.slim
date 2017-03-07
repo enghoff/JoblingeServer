@@ -1,0 +1,62 @@
+- content_for :admin_header_title
+  | #{@resource.nickname} progress
+
+
+h2.margin-bottom-30 Locations
+- @user_progress.locations.each do |item, puzzles|
+  .margin-bottom-30
+    - if item.completed?
+      i.fa.fa-check.text-success.margin-right-5
+    strong
+      = item.name
+    span.text-muted.margin-left-10= "Completed at:  #{ item.completed_at }" if item.completed?
+
+    .progress
+      .progress-bar class=item.progress_bar_class style=("min-width: 2em; width:#{ item.progress_percentage }")
+        = item.progress_percentage
+
+    ul.list-unstyled.padding-left-30
+      - puzzles.each do |puzzle|
+        li
+          p
+            - if puzzle.completed?
+              i.fa.fa-check.text-success.margin-right-5
+            - else
+              i.fa.fa-minus.margin-right-5
+            strong
+              = puzzle.name
+            span.text-muted.margin-left-10= "Completed at:  #{ puzzle.completed_at }" if puzzle.completed?
+            br
+            | Learning Topics:
+            '
+            = puzzle.learning_topic_names.join(", ")
+
+
+h2.margin-bottom-30.margin-top-50  Learning Topics
+- @user_progress.learning_topics.each do |item, puzzles|
+  .margin-bottom-30
+    - if item.completed?
+      i.fa.fa-check.text-success.margin-right-5
+    strong
+      = item.name
+    span.text-muted.margin-left-10= "Completed at:  #{ item.completed_at }" if item.completed?
+
+    .progress
+      .progress-bar class=item.progress_bar_class style=("min-width: 2em; width:#{ item.progress_percentage }")
+        = item.progress_percentage
+
+    ul.list-unstyled.padding-left-30
+      - puzzles.each do |puzzle|
+        li
+          p
+            - if puzzle.completed?
+              i.fa.fa-check.text-success.margin-right-5
+            - else
+              i.fa.fa-minus.margin-right-5
+            strong
+              = puzzle.name
+            span.text-muted.margin-left-10= "Completed at:  #{ puzzle.completed_at }" if puzzle.completed?
+            br
+            | Learning Topics:
+            '
+            = puzzle.learning_topic_names.join(", ")

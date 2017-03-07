@@ -1,0 +1,19 @@
+.row
+  .col-md-6
+    = errors_list(resource)
+    = simple_form_for [:admin, resource] do |f|
+      = f.input :role, collection: User.roles, selected: User.roles[f.object.role], disabled: !policy(resource).modify_role?
+      = f.input :nickname
+      = f.input :email, required: true
+      = f.association :location, required: true
+      = f.association :group, required: true
+      = f.input :gender, collection: User.genders, selected: User.genders[f.object.gender]
+      .row
+        .col-md-4
+          = f.input :birth_date_year, collection: 100.years.ago.year..Date.today.year, required: true
+        .col-md-4
+          = f.input :birth_date_month, collection: 1..12, required: true
+        .col-md-4
+          = f.input :birth_date_day, collection: 1..31, required: true
+      = f.input :password
+      = f.button :submit, class:"btn-primary margin-top-15"

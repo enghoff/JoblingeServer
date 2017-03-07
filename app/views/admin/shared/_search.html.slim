@@ -1,0 +1,21 @@
+form.admin-search
+  i.fa.fa-search.admin-search-symbol
+  input type="search" placeholder=placeholder name="term" value=params[:term]
+  .admin-search-close.hidden
+    i.fa.fa-close
+
+coffee:
+  changeCloseBtnVisibility = ->
+    $closeBtn = $(@).closest(".admin-search").find(".admin-search-close")
+    $closeBtn.toggleClass("hidden", $(@).val().length == 0)
+
+  $(".admin-search [name]").on "keyup keypress blur change", ->
+    changeCloseBtnVisibility.call(@)
+
+  $(".admin-search [name]").each ->
+    changeCloseBtnVisibility.call(@)
+
+  $(".admin-search-close").click ->
+    form = $(@).closest(".admin-search")
+    form.find("[name]").val("")
+    form.submit()

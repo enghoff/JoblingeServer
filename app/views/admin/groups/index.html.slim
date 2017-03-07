@@ -1,0 +1,30 @@
+- content_for :admin_header_title do
+  | Groups
+
+- content_for :admin_header_actions do
+  - if policy(Group).create?
+    = link_to 'New Group', new_admin_group_path, class:"btn btn-primary"
+
+- content_for :admin_subheader do
+  = render "/admin/shared/search", placeholder: "Search by name"
+
+.table-responsive
+  table.table.table-condensed.table-striped.nowrap-header.no-wrap-table
+    thead
+      tr
+        th = sortable_link(@search, :name)
+        th = sortable_link(@search, :created_at)
+    tbody
+      - @resources.each do |group|
+        tr
+          td = group.name
+          td = date_format(group.created_at)
+          td.text-right
+            .btn-group.btn-group-table-fix
+              - if policy(group).update?
+                = link_to 'Edit', edit_admin_group_path(group), class: "btn btn-default btn-sm"
+              - if policy(group).destroy?
+                = link_to admin_group_path(group), class: "btn btn-default btn-sm", data: {confirm: "Are you sure? Can not be undone" }, :method => :delete do
+                  span.text-danger Delete
+
+= paginate @resources

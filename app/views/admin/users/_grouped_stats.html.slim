@@ -1,0 +1,20 @@
+.btn-group
+  = link_to "Days",   statistics_admin_user_path(stats.user, grouped_by: :days),   remote: true, class: "btn btn-default #{'active' if stats.grouped_by == :days}"
+  = link_to "Weeks",  statistics_admin_user_path(stats.user, grouped_by: :weeks),  remote: true, class: "btn btn-default #{'active' if stats.grouped_by == :weeks}"
+  = link_to "Months", statistics_admin_user_path(stats.user, grouped_by: :months), remote: true, class: "btn btn-default #{'active' if stats.grouped_by == :months}"
+  = link_to "Years",  statistics_admin_user_path(stats.user, grouped_by: :years),  remote: true, class: "btn btn-default #{'active' if stats.grouped_by == :years}"
+
+
+.table-responsive
+  table.table.table-condensed.table-striped.nowrap-header.no-wrap-table
+    thead
+      tr
+        th
+        th Times played
+        th Total time
+    tbody
+      - stats.session_groups.each do |date, number_of_times, timespan|
+        tr
+          td = date
+          td = number_of_times
+          td = timespan

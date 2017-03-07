@@ -1,0 +1,20 @@
+doctype html
+html lang=I18n.locale
+  head
+    title
+      | Joblinge Dashboard
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    meta charset="utf-8"
+
+  body class=body_css_classes
+    = render "/shared/header"
+    = render "/shared/flash"
+    - if content_for?(:layout_main)
+      = yield(:layout_main)
+    - else
+      main.container
+        = yield
+    = render "/shared/footer"
+    = render "/shared/dev_tools"

@@ -1,0 +1,48 @@
+- content_for :admin_header_title do
+  | Users
+
+- content_for :admin_header_actions do
+  - if policy(User).create?
+    = link_to 'New User', new_admin_user_path, class:"btn btn-primary"
+
+- content_for :admin_subheader do
+  = render "/admin/shared/search", placeholder: "Search by nickname, email, location or group"
+
+
+.table-responsive
+  table.table.table-condensed.table-striped.nowrap-header.no-wrap-table
+    thead
+      tr
+        th = sortable_link(@search, :nickname)
+        th = sortable_link(@search, :email)
+        th = sortable_link(@search, :gender)
+        th = sortable_link(@search, :birth_date)
+        th = sortable_link(@search, :location_name, "Location")
+        th = sortable_link(@search, :group_name, "Group")
+        th = sortable_link(@search, :role)
+        th = sortable_link(@search, :registered_at)
+        th = sortable_link(@search, :created_at)
+        th
+    tbody
+      - @resources.each do |user|
+        tr
+          td = user.nickname
+          td = user.email
+          td = user.gender
+          td = date_day_format(user.birth_date)
+          td = user.location_name
+          td = user.group_name
+          td = user.role
+          td = date_format(user.registered_at)
+          td = date_format(user.created_at)
+          td.text-right
+            .btn-group.btn-group-table-fix
+              = link_to 'Progress', progress_admin_user_path(user), class: "btn btn-default btn-sm"
+              = link_to 'Stats', statistics_admin_user_path(user), class: "btn btn-default btn-sm"
+              - if policy(user).update?
+                = link_to 'Edit', edit_admin_user_path(user), class: "btn btn-default btn-sm"
+              - if policy(user).destroy?
+                = link_to admin_user_path(user), class: "btn btn-default btn-sm", data: {confirm: "Are you sure? Can not be undone" }, :method => :delete do
+                  span.text-danger Delete
+
+= paginate @resources

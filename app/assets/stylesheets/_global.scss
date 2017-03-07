@@ -1,0 +1,23 @@
+$footer-height: 38px;
+
+body.base_layout{
+  background: #EEE;
+}
+
+main{
+  padding-bottom: $footer-height + 20px;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5{
+  font-weight: 300;
+}
+
+a.link-white{
+  color: #EEE;
+  &:visited{
+    color: #EEE;
+  }
+  &:hover, &:active {
+    color: #FFF;
+  }
+}
